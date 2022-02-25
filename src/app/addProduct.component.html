@@ -1,0 +1,59 @@
+<!-- Show all items -->
+<h3>GET All Items</h3>
+
+<table>
+  <tr *ngFor="let product of _productsArray">
+      <td>
+          {{product.produceID}}
+      </td>
+      <td>
+          {{product.description}}
+      </td>
+      <td>
+          <a href="#" (click)="deleteProduct(product.produceID)">Delete</a>
+      </td>
+  </tr>
+</table>
+{{_errorMessage}}
+<hr/>
+<!-- Create data -->  
+<h3>Create Data</h3>
+<form #userPost="ngForm" (ngSubmit)="createProduct(userPost.value)">
+  <b>Product Name: </b>
+  <input type="text" name="description" ngModel placeholder="create data"> &nbsp;&nbsp;
+  <button type="submit">submit</button>
+ </form>
+ <br>
+ <hr/>
+<!-- Edit data -->
+<h3>Edit Data</h3>
+<select [(ngModel)]="_editId">
+  <option *ngFor="let product of _productsArray" value={{product.produceID}}>
+  {{product.produceID}} {{product.description}}
+  </option>
+</select>
+Update Description: <input type="text" [(ngModel)]="_editableDescription">
+<input type="submit" value="Submit" (click)="updateProduct()">
+<br><br>
+<hr/>
+<!-- Find Single Item -->
+<h3>Get Single Item</h3>
+<table>
+<tr *ngFor="let product of _productsArray">
+    <td>
+        {{product.description}}
+    </td>
+    <td>
+        <input type="radio"  name="selectProduct" value={{product.produceID}}
+        (click)="getProduct(product.produceID)"> 
+    </td>
+</tr>
+<tr>
+    <td>
+        <b>{{_singleProductName}}</b>
+    </td>
+    <td>
+        <b>{{_singleProductNumber}}</b>
+    </td>
+</tr>
+</table>
